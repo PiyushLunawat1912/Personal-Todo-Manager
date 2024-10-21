@@ -1,0 +1,56 @@
+<div class="container mt-5">
+  <h1 class="text-center">Welcome to Your Personal Todo Manager</h1>
+  <p class="text-center">
+    Keep track of all your tasks and boost your productivity.
+  </p>
+
+  <div class="row mt-4">
+    <!-- Create Todos Card -->
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <!-- Added margin-bottom for spacing -->
+        <div class="card-body">
+          <h5 class="card-title">Create Todos</h5>
+          <p class="card-text">Add new tasks to stay on top of things.</p>
+          <a routerLink="/todo" class="btn btn-primary btn-slg">Add Todo</a>
+          <!-- Changed btn-slg to btn-lg -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Your Todo List Card -->
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <!-- Added margin-bottom for spacing -->
+        <div class="card-body">
+          <h5 class="card-title">Your Todo List</h5>
+          <p class="card-text">Check off tasks as you complete them.</p>
+          <a routerLink="/todo" class="btn btn-primary btn-slg">
+            {{ todos.length }} Todo(s)
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mark as Complete Card -->
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <!-- Added margin-bottom for spacing -->
+        <div class="card-body">
+          <h5 class="card-title">Mark as Complete</h5>
+          <p class="card-text">Check off completed tasks and stay motivated!</p>
+          <a routerLink="/todo" class="btn btn-success btn-slg"
+            >View Completed</a
+          >
+          <!-- Optional button -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-5">
+    <a routerLink="/todo" class="btn btn-success btn-slg">
+      Get Started with Your Todos
+    </a>
+  </div>
+</div>
