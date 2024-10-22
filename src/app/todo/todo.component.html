@@ -40,7 +40,10 @@
     type="text"
     [(ngModel)]="title"
     class="form-control me-2"
-    placeholder="Add a new todo..."
+    placeholder="Add or edit todo..."
   />
-  <button class="btn btn-success" (click)="addTodo()">Add</button>
+  <button class="btn btn-success" (click)="addOrUpdateTodo()">
+    {{ editingTodo ? "Update" : "Add" }}
+    <!-- Button label changes based on mode -->
+  </button>
 </div>
