@@ -16,7 +16,7 @@ export class TodoComponent implements OnInit {
   todos: Todo[] = [];
   title: string = '';
   searchQuery: string = '';
-  editingTodo: Todo | null = null; // Added variable to track the todo being edited
+  editingTodo: Todo | null = null; // Track the current todo being edited
 
   constructor(private todoService: TodoService) {}
 
@@ -31,29 +31,32 @@ export class TodoComponent implements OnInit {
     });
   }
 
-  addTodo() {
+  addOrUpdateTodo() {
     if (this.title.trim()) {
       if (this.editingTodo) {
-        // Update the existing todo in edit mode
-        this.editingTodo.title = this.title;
-        this.editingTodo = null; // Reset editing mode
+        // Update the existing todo if in edit mode
+        const index = this.todos.findIndex(todo => todo.id === this.editingTodo?.id);
+        if (index !== -1) {
+          this.todos[index].title = this.title; // Update title
+        }
+        this.editingTodo = null; // Exit edit mode
       } else {
-        // Add new todo if not in edit mode
+        // Add new todo
         const newTodo: Todo = {
-          id: this.todos.length ? Math.max(...this.todos.map(t => t.id)) + 1 : 1,
+          id: this.todos.length ? Math.max(...this.todos.map(t => t.id)) + 1 : 1, // Assign unique ID
           title: this.title,
           completed: false,
         };
         this.todos.push(newTodo);
       }
-      this.title = '';
+      this.title = ''; // Clear input field
       this.saveTodos();
     }
   }
 
   editTodo(todo: Todo) {
     this.title = todo.title;
-    this.editingTodo = todo; // Set the current todo to be edited
+    this.editingTodo = todo; // Set the todo in edit mode
   }
 
   deleteTodo(todo: Todo) {
