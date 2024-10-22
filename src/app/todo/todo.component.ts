@@ -61,8 +61,11 @@ export class TodoComponent implements OnInit {
 
   deleteTodo(todo: Todo) {
     const index = this.todos.indexOf(todo);
-    this.todos.splice(index, 1);
-    this.saveTodos();
+    if (index !== -1) {
+      this.todos.splice(index, 1);
+      this.reassignIds();  // Reassign IDs after deletion
+      this.saveTodos();
+    }
   }
 
   onCheckboxClick(todo: Todo) {
@@ -74,6 +77,15 @@ export class TodoComponent implements OnInit {
     localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
+
+    // Reassign sequential IDs to remaining todos
+    private reassignIds() {
+      this.todos.forEach((todo, index) => {
+        todo.id = index + 1;
+      });
+    }
+  
+  
   get filteredTodos(): Todo[] {
     return this.todos.filter(todo =>
       todo.title.toLowerCase().includes(this.searchQuery.toLowerCase())
